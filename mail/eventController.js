@@ -3,11 +3,11 @@ const nodemailer = require ('nodemailer');
 const Mailgen = require('mailgen');
 const {EMAIL,PASSWORD} = require('../env.js')
 
-const signup = async(req,res) =>{
+const mailSignup = async(req,res) =>{
 
   const {user,userEmail} = req.body;  
 
-  let testAccount = await nodemailer.createTestAccount();
+  //let testAccount = await nodemailer.createTestAccount();
 
   // create reusable transporter object using the default SMTP transport
   let transporter = nodemailer.createTransport({
@@ -37,11 +37,12 @@ const signup = async(req,res) =>{
   let mail = MailGenerator.generate(response);
 
   let message = {
-    from: EMAIL, // sender address
+    from: user, // sender address
     to: userEmail, // list of receivers
     subject: "SIGNUP", // Subject line
     html:mail
   }
+
 
   transporter.sendMail(message).then((info)=>{
     return res.status(201).json({
@@ -56,5 +57,5 @@ const signup = async(req,res) =>{
 }
 
 module.exports = {
-    signup
+    mailSignup
 }
