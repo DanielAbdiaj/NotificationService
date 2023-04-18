@@ -2,7 +2,8 @@
 
 const express = require('express')
 const appRoute =require('./routes/routes.js')
-const socket = require('socket.io')
+const socketIO = require('socket.io')
+const http = require('http');
 
 
 const app =express();
@@ -15,25 +16,26 @@ app.use(express.json());
 
 app.use('/api',appRoute);
 
-app.use(express.static('public'));
+const server = http.createServer(app);
+const io = socketIO(server);
 
-const server=app.listen(PORT,()=>{
-
-    console.log(`Server is running on http://localhost:${PORT}`);
-
-
-})
 
 app.get('/',function(req,res){
     res.sendFile(__dirname+"/"+"index.html");
 })
 
 
-const io= socket(server);
+app.post('/notifications', (req, res) => {
+    
+    const {message}=req.body;
+      // Emit the notification message to all connected clients
+      io.emit('new-notification', message);
+  
+      res.status(200).send('Notification sent successfully');
+    });
+  
 
-const message='hsaakn'
-
- io.on('connection',function(socket){
+io.on('connection',function(socket){
 
     console.log('Made socket connection!');
 
@@ -41,9 +43,21 @@ const message='hsaakn'
         console.log("Made socket disconnected")
     })
 
-    io.emit('new-notification',message)
+})
+
+
+server.listen(PORT,()=>{
+
+    console.log(`Server is running on http://localhost:${PORT}`);
+
 
 })
+
+
+
+
+
+
 
 
 
