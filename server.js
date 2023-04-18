@@ -2,7 +2,8 @@
 
 const express = require('express')
 const appRoute =require('./routes/routes.js')
-const socket = require ("socket.io")
+const socket = require('socket.io')
+
 
 const app =express();
 
@@ -16,7 +17,7 @@ app.use('/api',appRoute);
 
 app.use(express.static('public'));
 
-const server = app.listen(PORT,()=>{
+const server=app.listen(PORT,()=>{
 
     console.log(`Server is running on http://localhost:${PORT}`);
 
@@ -28,21 +29,22 @@ app.get('/',function(req,res){
 })
 
 
-// const io= socket(server);
+const io= socket(server);
+
+const message='hsaakn'
+
+ io.on('connection',function(socket){
+
+    console.log('Made socket connection!');
+
+    socket.on('disconnect',function(){
+        console.log("Made socket disconnected")
+    })
+
+    io.emit('new-notification',message)
+
+})
 
 
 
-// const message="jcnwkjcn";
 
-//  io.on('connection',function(socket){
-
-//     console.log('Made socket connection!');
-
-//     socket.on('disconnect',function(){
-//         console.log("Made socket disconnected")
-//     })
-
-
-//     io.emit('new-notification',message)
-
-// })
