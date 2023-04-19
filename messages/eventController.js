@@ -4,14 +4,14 @@ const client = require('twilio')('ACed5ff85b67d59f9b912cecba4d0152df', 'ad58a637
 
 
 
-const textSignup = async(req,res) =>{
+const textMessage = async(req,res) =>{
 
-  const {username} = req.body;  
+  const {number,body} = req.body;  
 
   let message = {
       from: "+16204079596",
-      to: "+355692395541",
-      body:`Welcome ${username}! Thank you for Signing Up :)`    
+      to: number,
+      body: body   
   }
 
   client.messages.create(message).then(()=>{
@@ -24,28 +24,7 @@ const textSignup = async(req,res) =>{
 }
 
 
-const whatsAppSignup = async(req,res) =>{
-
-  // const {username} = req.body;  
-
-
-  //     const phone = "+355682822680";
-  //     const messg=`Welcome ${username}! Thank you for Signing Up :)`; 
-
-  // wbm.start().then(async()=>{
-  //   await wbm.send(phone,messg);
-  //   await wbm.end();
-  //   return res.status(201).json({
-  //       message:"Text Message delivered Successfully!",
-  //   });
-  // }).catch(err=>{
-  //   return res.status(201).json({message: err});
-  // })
-}
-
-
 
 module.exports = {
-    textSignup,
-    whatsAppSignup
+    textMessage
 }

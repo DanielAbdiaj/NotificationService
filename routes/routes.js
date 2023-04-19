@@ -2,12 +2,12 @@
 
 const router = require('express').Router();
 
-const {mailSignup}= require('../mail/eventController.js')
-const {textSignup}= require('../messages/eventController.js')
-const {whatsAppSignup} = require('../messages/eventController.js')
+const {mail}= require('../mail/eventController.js')
+const {textMessage}= require('../messages/eventController.js')
 
-router.post('/mail/signup', mailSignup)
-router.post('/textMessage/signup',textSignup)
-router.post('/whatsApp/signup',whatsAppSignup)
+router.post('/mail', mail)
+router.post('/textMessage',textMessage)
+
 
 module.exports = router;
+
