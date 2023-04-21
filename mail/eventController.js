@@ -5,7 +5,7 @@ const {EMAIL,PASSWORD} = require('../env.js')
 
 const mail = async(req,res) =>{
 
-  const {user,email,body} = req.body;  
+  const {email,body} = req.body;  
 
   //let testAccount = await nodemailer.createTestAccount();
 
@@ -28,7 +28,6 @@ const mail = async(req,res) =>{
 
   let response = {
     body: {
-      name:user,
       intro:body,
     }
   }
