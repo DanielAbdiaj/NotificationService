@@ -20,16 +20,24 @@ const server = http.createServer(app);
 const io = socketIO(server);
 
 
-app.get('/',function(req,res){
-    res.sendFile(__dirname+"/"+"index.html");
+app.get('/index1',function(req,res){
+    res.sendFile(__dirname+"/"+"index_1.html");
+})
+
+app.get('/index2',function(req,res){
+    res.sendFile(__dirname+"/"+"index_2.html");
+})
+
+app.get('/index3',function(req,res){
+    res.sendFile(__dirname+"/"+"index_3.html");
 })
 
 
 app.post('/notifications', (req, res) => {
     
-    const {message}=req.body;
+    const {message,target}=req.body;
       // Emit the notification message to all connected clients
-      io.emit('new-notification', message);
+      io.to(target).emit('new-notification', message);
   
       res.status(200).send('Notification sent successfully');
     });
@@ -41,6 +49,10 @@ io.on('connection',function(socket){
 
     socket.on('disconnect',function(){
         console.log("Made socket disconnected")
+    })
+
+    socket.on('join',(userRoom)=>{
+        socket.join(userRoom);
     })
 
 })

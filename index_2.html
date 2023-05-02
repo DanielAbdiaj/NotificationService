@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script
+    src="https://cdn.socket.io/4.5.0/socket.io.min.js"
+    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
+    crossorigin="anonymous"
+  ></script>
+    <style>
+        #snackbar {
+          visibility: hidden;
+          min-width: 250px;
+          margin-left: -125px;
+          background-color: #333;
+          color: #fff;
+          text-align: center;
+          border-radius: 2px;
+          padding: 16px;
+          position: fixed;
+          z-index: 1;
+          left: 50%;
+          bottom: 30px;
+          font-size: 17px;
+        }
+        
+        #snackbar.show {
+          visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+          from {bottom: 0; opacity: 0;} 
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadein {
+          from {bottom: 0; opacity: 0;}
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @-webkit-keyframes fadeout {
+          from {bottom: 30px; opacity: 1;} 
+          to {bottom: 0; opacity: 0;}
+        }
+        
+        @keyframes fadeout {
+          from {bottom: 30px; opacity: 1;}
+          to {bottom: 0; opacity: 0;}
+        }
+        </style>
+</head>
+<body>
+
+    <h2>Notification Centre 2</h2>
+    
+
+    <div id="snackbar">Some text some message..</div>
+    
+</body>
+
+<script>
+
+    const socket=io();
+
+    socket.on('new-notification',(resp)=>{
+        myFunction(resp);
+    })
+
+    socket.emit("join","room2")
+
+
+    function myFunction(text) {
+      var x = document.getElementById("snackbar");
+      x.className = "show";
+      x.innerHTML = text;
+      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+    }
+
+    </script>
+
+    
+</html>

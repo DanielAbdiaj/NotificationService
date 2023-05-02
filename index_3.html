@@ -56,7 +56,7 @@
 </head>
 <body>
 
-    <h2>Notification Centre</h2>
+    <h2>Notification Centre 3</h2>
     
 
     <div id="snackbar">Some text some message..</div>
@@ -70,6 +70,8 @@
     socket.on('new-notification',(resp)=>{
         myFunction(resp);
     })
+
+    socket.emit("join","room3")
 
 
     function myFunction(text) {

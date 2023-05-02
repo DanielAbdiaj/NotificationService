@@ -5,7 +5,7 @@ const {EMAIL,PASSWORD} = require('../env.js')
 
 const mail = async(req,res) =>{
 
-  const {email,body} = req.body;  
+  const {emails,body} = req.body;  
 
   //let testAccount = await nodemailer.createTestAccount();
 
@@ -18,42 +18,45 @@ const mail = async(req,res) =>{
     }
   });
 
-  let MailGenerator = new Mailgen({
-    theme : 'default',
-    product :{
-        name : "Mailgen",
-        link : 'https://mailgen.js'
-    }
-  })
+  // const delivered=false;
+  // const error=null;
 
-  let response = {
-    body: {
-      intro:body,
-    }
-  }
-  
-  let mail = MailGenerator.generate(response);
+  //////
 
-  let message = {
-    from: EMAIL, // sender address
-    to: email, // list of receivers
-    subject: "NOTIFICATION", // Subject line
-    html:mail
-  }
+  emails.forEach(email => {
 
+        let MailGenerator = new Mailgen({
+          theme : 'default',
+          product :{
+              name : "Mailgen",
+              link : 'https://mailgen.js'
+          }
+        })
 
-  transporter.sendMail(message).then((info)=>{
-    return res.status(201).json({
-        message:"Email delivered Successfully!",
-        info : info.messageId,
-        preview : nodemailer.getTestMessageUrl(info)
+        let response = {
+          body: {
+            intro:body,
+          }
+        }
+        
+        let mail = MailGenerator.generate(response);
+
+        let message = {
+          from: EMAIL, // sender address
+          to: email, // list of receivers
+          subject: "NOTIFICATION", // Subject line
+          html:mail
+        }
+
+        transporter.sendMail(message)
+
     });
-  }).catch(err=>{
-    return res.status(201).json({message: err});
-  })
+
+        return res.status(201).json({
+          message:"All emails delivered Successfully!",
+        });
 
 }
-
 module.exports = {
     mail
 }

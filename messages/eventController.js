@@ -6,24 +6,26 @@ const client = require('twilio')('ACed5ff85b67d59f9b912cecba4d0152df', 'ad58a637
 
 const textMessage = async(req,res) =>{
 
-  const {number,body} = req.body;  
+  const {numbers,body} = req.body; 
+  
+  
+  numbers.forEach(number => {
 
-  let message = {
-      from: "+16204079596",
-      to: number,
-      body: body   
-  }
+        let message = {
+          from: "+16204079596",
+          to: number,
+          body: body   
+        }
 
-  client.messages.create(message).then(()=>{
-    return res.status(201).json({
-        message:"Text Message delivered Successfully!",
-    });
-  }).catch(err=>{
-    return res.status(201).json({message: err});
+      client.messages.create(message);
+    
+  });
+
+  return res.status(201).json({
+    message:"Text Message delivered Successfully!",
   })
+
 }
-
-
 
 module.exports = {
     textMessage
