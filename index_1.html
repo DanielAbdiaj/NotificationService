@@ -52,11 +52,39 @@
           from {bottom: 30px; opacity: 1;}
           to {bottom: 0; opacity: 0;}
         }
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.6s;
+            margin-bottom: 15px;
+          }
+
+          .alert.success {background-color: #04AA6D;}
+          .alert.info {background-color: #2196F3;}
+          .alert.warning {background-color: #ff9800;}
+
+          .closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+          }
+
+          .closebtn:hover {
+            color: black;
+          }
         </style>
 </head>
 <body>
 
     <h2>Notification Centre 1</h2>
+
     
 
     <div id="snackbar">Some text some message..</div>
@@ -64,22 +92,60 @@
 </body>
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
 <script>
 
+    function myFunction(text) {
+            var x = document.getElementById("snackbar");
+            x.className = "show";
+            x.innerHTML = text;
+            setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+    }
+
+    const showNotifications=async (key)=>{
+              const data=await axios.post('http://localhost:5000/getRedisData', {
+                target: key
+              });
+                
+              const notifications=data?.data;
+              
+              Object.entries(notifications).forEach((entry) => {
+                const [key, value] = entry;
+                const notification=document.createElement('div')
+                notification.setAttribute('class','alert')
+                notification.setAttribute('id',key);
+                notification.innerHTML=`
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                ${key}
+                `
+                let body = document.querySelector("body");
+                body.append(notification)
+              });
+
+              return notifications
+    }
+
     const socket=io();
+
+    socket.emit("join","room1")
 
     socket.on('new-notification',(resp)=>{
         myFunction(resp);
     })
 
-    socket.emit("join","room1")
+    showNotifications('room1');
+  
 
-    function myFunction(text) {
-      var x = document.getElementById("snackbar");
-      x.className = "show";
-      x.innerHTML = text;
-      setTimeout(function(){ x.className = x.className.replace("show", ""); }, 20000);
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    for (i = 0; i < close.length; i++) {
+      close[i].onclick = function(){
+        var div = this.parentElement;
+        div.style.opacity = "0";
+        setTimeout(function(){ div.style.display = "none"; }, 600);
+      }
     }
 
     </script>
