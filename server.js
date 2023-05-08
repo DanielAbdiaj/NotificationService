@@ -5,6 +5,7 @@ const appRoute =require('./routes/routes.js')
 const socketIO = require('socket.io')
 const http = require('http');
 const redis=require('redis')
+const uniqid =require('uniqid');
 
 
 const app =express();
@@ -47,65 +48,38 @@ app.get('/index3',function(req,res){
 
 
 
-app.post('/notifications', async(req, res) => {
+    app.post('/notifications', async(req, res) => {
     
-    const {message,target}=req.body;
+            const {message,target}=req.body;
 
-    const key= await client.exists(target);
+            client.hSet(target,uniqid(),message);
 
-    if(key){
-            const data = await client.get(target);
-            if(data != null){
-                let oldData=JSON.parse(data);
-                let newData={...oldData,[message]:target}
-                client.set(target,JSON.stringify(newData))
-            }else{
-                console.log('Could not get data from Redis!')
-            }
-    }
-    else{
-                let newData={
-                    [message]:target
-                }
-                client.set(target,JSON.stringify(newData));
-            }
-      
-      // Emit the notification message to all connected clients
-      io.to(target).emit('new-notification', message);
+            const notifications=await client.hGetAll(target);
 
-      res.status(200).send('Notification sent successfully');
+            // Emit the notification message to all connected clients
+            io.to(target).emit('new-notification', {message: message, notifications: notifications});
+
+            res.status(200).send('Notification sent successfully');
     });
+
+
 
     app.post('/getRedisData', async(req, res) => {
     
         const {target}=req.body;
-    
-        const key= await client.exists(target);
-    
-        if(key){
-                const data = await client.get(target);
-                if(data != null){
-                    res.status(200).send(data);
-                }else{
-                    res.status(200).send('Could not get data from Redis!');
-                }
-        }else{
-            res.status(200).send('Target does not exist!');
-        }
+
+        const result= await client.hGetAll(target);
+
+        res.status(200).send(result);
     });
 
-    app.post('/updateRedisData', async(req, res) => {
+    app.post('/deleteRedisData', async(req, res) => {
     
-        const {updatedData,target}=req.body;
-    
-        const key= await client.exists(target);
-    
-        if(key){
-                client.set(target,updatedData)
-                res.status(200).send('Target updated successfuly!');
-        }else{
-            res.status(200).send('Target does not exist!');
-        }
+        const {target,key}=req.body;
+        
+       const result = client.hDel(target,key);
+
+       res.status(200).send("Data deleted succesfully!");
     });
       
 
@@ -117,12 +91,16 @@ io.on('connection',function(socket){
         console.log("Made socket disconnected")
     })
 
-    socket.on('join',(userRoom)=>{
-        socket.join(userRoom);
+    socket.on('join',async(userRoom)=>{
+        await socket.join(userRoom);
+        const notifications=await client.hGetAll(userRoom);
+        io.to(userRoom).emit("joined",notifications)
     })
 
+    socket.on('deleteNotifications',async(res)=>{
+        await client.hDel(res.target,res.key);
+    })
 })
-
 
 server.listen(PORT,()=>{
 
