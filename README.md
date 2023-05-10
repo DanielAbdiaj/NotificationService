@@ -24,9 +24,7 @@ The usage on each of these is explained with details down bellow.
 First and foremost before starting anything else you have to open you terminal and run `npm install` inside this project directory.This will download all 
 the neccessary packages and dependencies that you will need for the server to work.
 
-Then you have to start your server using `npm start`.This will start you server and now you are ready to go!
-
-Another thing that you will need is to connect your server to `Redis`.To ensure that users never miss an important live notification, 
+Then another thing that you will need is to connect your server to `Redis`.To ensure that users never miss an important live notification, 
 the service also saves these messages to a Redis (which stands for Remote Dictionary Server) database when the user is offline or has not seen the message.
 
 To connect to Redis you will have to install Redis for Windows(https://github.com/microsoftarchive/redis/releases).
@@ -38,9 +36,17 @@ After the installation is completed open your Command Prompt and go to the desti
 
 <img width="960" alt="Screenshot 2023-05-10 234620" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ea20cfe0-97cc-4ba8-b252-6d21dd9a2beb">
 
+If you get this response your Redis database is setup!(If you want you can run also redis-cli to check your database and manually make changes)
 
-If you get this response your Redis database is setup!
+Finally you have to start your server using `npm start`.
 
+If everything went alright you should see this:
+
+<img width="328" alt="Screenshot 2023-05-10 235816" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/214ffb58-3c6e-4ded-8f30-1b82278aba54">
+
+This means that your server has started succesfully and you are connected with your Redis database!
+
+Now you are ready to go!
 
 ### Sending Emails
 
