@@ -26,6 +26,9 @@ the neccessary packages and dependencies that you will need for the server to wo
 
 Then you have to start your server using `npm start`.This will start you server and now you are ready to go!
 
+Another thing that you will need is to connect your server to `Redis`.To ensure that users never miss an important live notification, 
+the service also saves these messages to a Redis (which stands for Remote Dictionary Server) database when the user is offline or has not seen the message.
+
 ### Sending Emails
 
 Like I explained above to send an email to a specific group of users you have to call a post method to the API endpoint that is used to send emails.
