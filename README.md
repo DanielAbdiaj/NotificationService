@@ -29,6 +29,19 @@ Then you have to start your server using `npm start`.This will start you server 
 Another thing that you will need is to connect your server to `Redis`.To ensure that users never miss an important live notification, 
 the service also saves these messages to a Redis (which stands for Remote Dictionary Server) database when the user is offline or has not seen the message.
 
+To connect to Redis you will have to install Redis for Windows(https://github.com/microsoftarchive/redis/releases).
+
+Install Redis-x64-3.0.504.msi and run it (Keep in mind when installing it to add the Redis installation folder to the path enviroment variable and let
+Redis to run to the deafult port **6379**)
+
+After the installation is completed open your Command Prompt and go to the destination folder where you installed Redis (default destination folder **cd C:\Program Files\Redis**) in order to start our server.To start the server **run redis-server --port 6380 --slaveof 127.0.0.1 6379** 
+
+<img width="960" alt="Screenshot 2023-05-10 234620" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ea20cfe0-97cc-4ba8-b252-6d21dd9a2beb">
+
+
+If you get this response your Redis database is setup!
+
+
 ### Sending Emails
 
 Like I explained above to send an email to a specific group of users you have to call a post method to the API endpoint that is used to send emails.
