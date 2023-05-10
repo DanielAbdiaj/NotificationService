@@ -8,7 +8,7 @@ using :
 
 ## Description
 The purpose of this service is to send notifications to a group of users in 3 different ways.So I have created 3 different **endpoints** for every operation.
-The idea is that you will call the post method for a specific endpoint(for ex. I will call the email endpoint) and give the necessary information( in JSON format ) 
+The idea is that you will call the post method for a specific endpoint(for ex. You will call the email endpoint) and give the necessary information( in JSON format ) 
 about the :
 
 * Content: 'Welcome to our Site!' (content of the notification)
