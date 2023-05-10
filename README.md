@@ -56,7 +56,6 @@ The API call should look something like this :
 
 <img width="644" alt="Screenshot 2023-05-11 004931" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/81d7f407-bc9e-4322-960b-001b5c9c658d">
 
-
 If you get this response that the emails are delivered successfully then everything went ok!
 
 * ### Sending Text Messages
@@ -66,7 +65,6 @@ that is used to send text messages and and pass a JSON object with the **content
 The API call should look something like this :
 
 <img width="643" alt="Screenshot 2023-05-11 011015" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/7f6282ea-a40f-45d8-9070-79eb996d1c54">
-
 
 If you get this response that the text messages are delivered successfully then everything went ok!
 
