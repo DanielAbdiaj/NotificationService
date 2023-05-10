@@ -7,6 +7,6 @@ using :
 * Live Push Notifications
 
 ## Description
-This is a service 
+The purpose of this service is to send notifications to a group of users in 3 different ways.So I have created 3 different **endpoints** for this operation.
 
 
