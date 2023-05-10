@@ -12,7 +12,7 @@ The idea is that you will call the post method for a specific endpoint(for ex. y
 about the :
 
 * Content: 'Welcome to our Site!' (content of the notification)
-* Target: 'example@gmail.com' (Who to send the notification to)
+* Targets: 'example@gmail.com' (Who to send the notification to)
 
 In this way my server using nodemailer will send notifications to a specific group of users.The same approach is implemented also for Text Messages 
 and Live Push Notifications.
@@ -50,9 +50,18 @@ Now you are ready to go!
 
 ### Sending Emails
 
-Like I explained above to send an email to a specific group of users you have to call a post method to the API endpoint that is used to send emails.
+Like I explained in the description to send an email to a specific group of users you have to call a post method to the API endpoint(**http://localhost:5000/api/mail**) 
+that is used to send emails and pass a JSON object with the **content**(Content of the email) and **targets**(Who to send the email to).You can do this in different ways,
+but the most coommon way is using **Postman**.
 
-Email endpoint : http://localhost:5000/api/mail
+The API call should look something like this :
+
+<img width="644" alt="Screenshot 2023-05-11 004931" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/81d7f407-bc9e-4322-960b-001b5c9c658d">
+
+If you get this response that the emails are delivered successfully then everything went ok!
+
+
+
 
 
 
