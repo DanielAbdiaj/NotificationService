@@ -58,6 +58,20 @@ The API call should look something like this :
 
 If you get this response that the emails are delivered successfully then everything went ok!
 
+* ### Sending Text Messages
+You will follow the same approach for sending text messages.You will call the post method to the API endpoint(**http://localhost:5000/api/textMessage**) 
+that is used to send text messages and and pass a JSON object with the **content**(Content of the text) and **targets**(Who to send the text messages to).
+
+The API call should look something like this :
+
+<img width="643" alt="Screenshot 2023-05-11 011015" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/7f6282ea-a40f-45d8-9070-79eb996d1c54">
+
+If you get this response that the text messages are delivered successfully then everything went ok!
+
+* ### Sending Live Push Notifications
+
+* ### Client Side Listening for the Live Notifications
+
 
 
 
