@@ -48,7 +48,7 @@ This means that your server has started succesfully and you are connected with y
 
 Now you are ready to go!
 
-### Sending Emails
+* ### Sending Emails
 
 Like I explained in the description to send an email to a specific group of users you have to call a post method to the API endpoint(**http://localhost:5000/api/mail**) 
 that is used to send emails and pass a JSON object with the **content**(Content of the email) and **targets**(Who to send the email to).You can do this in different ways,
