@@ -11,8 +11,8 @@ The purpose of this service is to send notifications to a group of users in 3 di
 The idea is that i will call the post method for a specific endpoint(for ex. I will call the email endpoint) and give the necessary information( in JSON format ) 
 about the :
 
-* Content:'Welcome to our Site!'(content of the notification)
-* Target:'example@gmail.com'(Who to send the notification to)
+* Content: 'Welcome to our Site!' (content of the notification)
+* Target: 'example@gmail.com' (Who to send the notification to)
 
 In this way my server using nodemailer will send notifications to a specific group of users.The same approach is implemented also for Text Messages 
 and Live Push Notifications.
