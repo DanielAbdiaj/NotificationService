@@ -77,6 +77,7 @@ The API call should look something like this :
 
 <img width="643" alt="Screenshot 2023-05-11 015715" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ceadb1e3-356b-4f26-b0d7-8d0af79b5c0a">
 
+If you get this response that the notification delivered successfully then everything went ok!
 
 * ### Client Side Listening for the Live Notifications
 
