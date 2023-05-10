@@ -17,4 +17,8 @@ about the :
 In this way my server using nodemailer will send notifications to a specific group of users.The same approach is implemented also for Text Messages 
 and Live Push Notifications.
 
+## Usage
+
+### Sending Emails
+
 
