@@ -21,7 +21,7 @@ The usage on each of these is explained with details down bellow.
 
 ## Usage
 
-First and foremost before starting anything else you have to open you terminal and run `npm install`.This will download all 
+First and foremost before starting anything else you have to open you terminal and run `npm install` inside this project directory.This will download all 
 the neccessary packages and dependencies that you will need for the server to work.
 
 Then you have to start your server using `npm start`.This will start you server and now you are ready to go!
