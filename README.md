@@ -34,7 +34,7 @@ Redis to run to the deafult port **6379**)
 
 After the installation is completed open your Command Prompt and go to the destination folder where you installed Redis (default destination folder **cd C:\Program Files\Redis**) in order to start our server.To start the server **run redis-server --port 6380 --slaveof 127.0.0.1 6379** 
 
-<img width="960" alt="Screenshot 2023-05-10 234620" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ea20cfe0-97cc-4ba8-b252-6d21dd9a2beb">
+![ScreenShot](<img width="960" alt="Screenshot 2023-05-10 234620" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ea20cfe0-97cc-4ba8-b252-6d21dd9a2beb">)
 
 If you get this response your Redis database is setup!(If you want you can run also redis-cli to check your database and manually make changes)
 
