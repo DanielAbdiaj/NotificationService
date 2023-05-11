@@ -92,7 +92,7 @@ First thing I have done is to connect the client with the server or in other wor
 using API.
 
 * **Subscribe Function**:
-  This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to enter a         specific room.
+  This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to be part of a      specific room.
 * 
 
 
