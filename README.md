@@ -73,6 +73,8 @@ For sending live push notifications I have used socket.io.The idea behind this i
 from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that I call the API
 (http://localhost:5000/liveNotifications) with the **target**(which in this case is the socketID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear for the notification(I will explain with more detail how the client part will work and how he will the hear for the notifications down bellow).
 
+Also this is the moment where Redis come into play.You that are using this service do not know if the user that you have emitted the notification has seen it or not(he maybe offline for the moment).This is why I have incorporated Redis,for the purpose of saving those notifications.As the notification is emitted to the user it is also saved to the Redis database. 
+
 The API call should look something like this :
 
 <img width="643" alt="Screenshot 2023-05-11 015715" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/ceadb1e3-356b-4f26-b0d7-8d0af79b5c0a">
