@@ -86,12 +86,14 @@ If you get this response that the notification delivered successfully then every
 The client on his side will listen for the notifications and manage those using some specific functions.I have included some of the functions in a **client folder** that
 has a **functions.js file**.
 
-
-
-First thing to do is to connect the client with the server or in other words make a socket connection since the client will be not communacating 
-using API anymore.
-
 <img width="646" alt="image" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/a25e6d13-6dbe-44b5-aa90-2ae597289ea1">
+
+First thing I have done is to connect the client with the server or in other words make a socket connection since the client will be not communicating 
+using API.
+
+* Subscribe Function
+  This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to enter a         specific room.
+* 
 
 
 
