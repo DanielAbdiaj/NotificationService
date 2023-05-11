@@ -93,7 +93,7 @@ using API.
 
 * **Subscribe Function**:
   This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
-* **socket.on Function**:
+* **socket.on 'new-notification' Function**:
   Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room from Redis after this new notification was added.
 * **Delete Function**:
   Using this function the client can manage his notifications by deleting each one of them after he has seen them.
