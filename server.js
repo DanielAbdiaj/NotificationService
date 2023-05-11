@@ -48,9 +48,9 @@ app.get('/index3',function(req,res){
 
 
 
-    app.post('/notifications', async(req, res) => {
+    app.post('/liveNotifications', async(req, res) => {
     
-            const {message,target}=req.body;
+            const {target,message}=req.body;
 
             client.hSet(target,uniqid(),message);
 
@@ -59,7 +59,7 @@ app.get('/index3',function(req,res){
             // Emit the notification message to all connected clients
             io.to(target).emit('new-notification', {message: message, notifications: notifications});
 
-            res.status(200).send('Notification sent successfully');
+            res.status(200).send('Notification sent Successfully');
     });
 
 
@@ -91,22 +91,20 @@ io.on('connection',function(socket){
         console.log("Made socket disconnected")
     })
 
-    socket.on('join',async(userRoom)=>{
+    socket.on('subscribe',async(userRoom)=>{
         await socket.join(userRoom);
         const notifications=await client.hGetAll(userRoom);
-        io.to(userRoom).emit("joined",notifications)
-    })
+        io.to(userRoom).emit("subscribed",notifications)
+    }) 
 
     socket.on('deleteNotifications',async(res)=>{
-        await client.hDel(res.target,res.key);
+        await client.hDel(res.room,res.key);
     })
 })
 
 server.listen(PORT,()=>{
 
     console.log(`Server is running on http://localhost:${PORT}`);
-
-
 })
 
 

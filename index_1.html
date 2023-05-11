@@ -5,11 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script
-    src="https://cdn.socket.io/4.5.0/socket.io.min.js"
-    integrity="sha384-7EyYLQZgWBi67fBtVxw60/OWl1kjsfrPFcaU0pp0nAh+i8FD068QogUvg85Ewy1k"
-    crossorigin="anonymous"
-  ></script>
     <style>
         #snackbar {
           visibility: hidden;
@@ -129,37 +124,28 @@
   }
 
   const socket=io();
-
-  async function join() {
+  async function subscribe(room) {
     
-     await socket.emit("join","room1");
+    await socket.emit("subscribe",room);
 
-     socket.on("joined",(resp)=>{
-        showNotifications(resp);
-      })
+    socket.on("subscribed",(resp)=>{
+      showNotifications(resp);
+     })
   }
 
-  join();
+  subscribe('user1')
   
-
-
   socket.on('new-notification',(resp)=>{
-    console.log(resp);
       myFunction(resp.message);
       showNotifications(resp.notifications);
   })
-
-    async function deleteNotification(target,key){    
-        await socket.emit("deleteNotifications",{target:target,key:key})
+    async function deleteNotification(room,key){    
+        await socket.emit("deleteNotifications",{room:room,key:key})
       }
-
-
       const onClick = (event) => {
-          console.log(event.target.id); 
-          deleteNotification('room1',event.target.id);
+          deleteNotification('user1',event.target.id);
         }
       window.addEventListener('click', onClick);
-
 
   </script>
 

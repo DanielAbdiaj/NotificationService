@@ -5,7 +5,9 @@ const {EMAIL,PASSWORD} = require('../env.js')
 
 const mail = async(req,res) =>{
 
-  const {emails,body} = req.body;  
+  const {content,targets} = req.body;  
+
+  try{
 
   //let testAccount = await nodemailer.createTestAccount();
 
@@ -23,7 +25,7 @@ const mail = async(req,res) =>{
 
   //////
 
-  emails.forEach(email => {
+  targets.forEach((target)=> {
 
         let MailGenerator = new Mailgen({
           theme : 'default',
@@ -35,7 +37,7 @@ const mail = async(req,res) =>{
 
         let response = {
           body: {
-            intro:body,
+            intro:content,
           }
         }
         
@@ -43,7 +45,7 @@ const mail = async(req,res) =>{
 
         let message = {
           from: EMAIL, // sender address
-          to: email, // list of receivers
+          to: target, // list of receivers
           subject: "NOTIFICATION", // Subject line
           html:mail
         }
@@ -55,6 +57,12 @@ const mail = async(req,res) =>{
         return res.status(201).json({
           message:"All emails delivered Successfully!",
         });
+
+    }catch(err){
+      return res.status(201).json({
+        message:"Something went wrong",
+      });
+    }
 
 }
 module.exports = {

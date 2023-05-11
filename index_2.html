@@ -129,32 +129,28 @@
 
     const socket=io();
 
-    async function join() {
-
-       await socket.emit("join","room2");
-
-       socket.on("joined",(resp)=>{
-          showNotifications(resp);
-        })
-    }
-
-    join();
+    async function subscribe(room) {
     
-  
+    await socket.emit("subscribe",room);
+
+    socket.on("subscribed",(resp)=>{
+      showNotifications(resp);
+     })
+  }
+    subscribe('user2')
 
     socket.on('new-notification',(resp)=>{
-      console.log(resp);
         myFunction(resp.message);
         showNotifications(resp.notifications);
     })
 
     
-    async function deleteNotification(target,key){    
-        await socket.emit("deleteNotifications",{target:target,key:key})
+    async function deleteNotification(room,key){    
+        await socket.emit("deleteNotifications",{room:room,key:key})
       }
         const onClick = (event) => {
             console.log(event.target.id); 
-            deleteNotification('room2',event.target.id);
+            deleteNotification('user2',event.target.id);
           }
         window.addEventListener('click', onClick);
 
