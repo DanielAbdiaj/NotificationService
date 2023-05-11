@@ -71,7 +71,7 @@ If you get this response that the text messages are delivered successfully then 
 * ### Sending Live Push Notifications
 For sending live push notifications I have used socket.io.The idea behind this is that the client from his side will subscribe to a socket room using a socket ID and you
 from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that I call the API
-(http://localhost:5000/liveNotifications)with the **target**(which in this case is the socketID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the clients can hear the notification(I will explain with more detail how the client part will work and how will the hear for the notifications down bellow).
+(http://localhost:5000/liveNotifications)with the **target**(which in this case is the socketID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear the notification(I will explain with more detail how the client part will work and how will the hear for the notifications down bellow).
 
 The API call should look something like this :
 
