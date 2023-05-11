@@ -83,6 +83,17 @@ If you get this response that the notification delivered successfully then every
 
 * ### Client Side Listening for the Live Notifications
 
+The client on his side will listen for the notifications and manage those using some specific functions.I have included some of the functions in a **client folder** that
+has a **functions.js file**.
+
+
+
+First thing to do is to connect the client with the server or in other words make a socket connection since the client will be not communacating 
+using API anymore.
+
+<img width="646" alt="image" src="https://github.com/DanielAbdiaj/NotificationService/assets/117307377/a25e6d13-6dbe-44b5-aa90-2ae597289ea1">
+
+
 
 
 
