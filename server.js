@@ -2,7 +2,6 @@
 
 const express = require('express')
 const appRoute =require('./routes/routes.js')
-const socketIO = require('socket.io')
 const http = require('http');
 const redis=require('redis')
 const uniqid =require('uniqid');
@@ -13,7 +12,7 @@ const app =express();
 const PORT = process.env.PORT || 5000;
 const REDIS_PORT=6379;
 
-//Redis setup
+///////Redis setup
 
 const client=redis.createClient(REDIS_PORT);
 
@@ -23,6 +22,8 @@ client.connect().then(()=>{
     console.log(err);
 })
 
+//////////////
+
 
 app.use(express.json());
 
@@ -31,57 +32,12 @@ app.use(express.json());
 app.use('/api',appRoute);
 
 const server = http.createServer(app);
-const io = socketIO(server);
 
-
-app.get('/index1',function(req,res){
-    res.sendFile(__dirname+"/"+"index_1.html");
-})
-
-app.get('/index2',function(req,res){
-    res.sendFile(__dirname+"/"+"index_2.html");
-})
-
-app.get('/index3',function(req,res){
-    res.sendFile(__dirname+"/"+"index_3.html");
-})
-
-
-
-    app.post('/liveNotifications', async(req, res) => {
-    
-            const {target,message}=req.body;
-
-            client.hSet(target,uniqid(),message);
-
-            const notifications=await client.hGetAll(target);
-
-            // Emit the notification message to all connected clients
-            io.to(target).emit('new-notification', {message: message, notifications: notifications});
-
-            res.status(200).send('Notification sent Successfully');
-    });
-
-
-
-    app.post('/getRedisData', async(req, res) => {
-    
-        const {target}=req.body;
-
-        const result= await client.hGetAll(target);
-
-        res.status(200).send(result);
-    });
-
-    app.post('/deleteRedisData', async(req, res) => {
-    
-        const {target,key}=req.body;
-        
-       const result = client.hDel(target,key);
-
-       res.status(200).send("Data deleted succesfully!");
-    });
-      
+const io = require('socket.io')(server, {
+    cors: {
+      origin: '*',
+    }
+});
 
 io.on('connection',function(socket){
 
@@ -93,6 +49,7 @@ io.on('connection',function(socket){
 
     socket.on('subscribe',async(userRoom)=>{
         await socket.join(userRoom);
+        console.log(`Subscribed:${userRoom}`);
         const notifications=await client.hGetAll(userRoom);
         io.to(userRoom).emit("subscribed",notifications)
     }) 
@@ -101,6 +58,22 @@ io.on('connection',function(socket){
         await client.hDel(res.room,res.key);
     })
 })
+
+
+app.post('/liveNotifications', async(req, res) => {
+    
+            const {target,message}=req.body;
+
+            client.hSet(target,uniqid(),message);
+
+            const notifications=await client.hGetAll(target);
+
+            // Emit the notification message to all connected clients
+            io.to(target).emit('new-notification', {message: message, notifications: notifications});
+
+            res.status(200).send('Notification sent Successfully');
+});
+
 
 server.listen(PORT,()=>{
 
