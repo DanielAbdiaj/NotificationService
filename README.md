@@ -111,9 +111,9 @@ The client on his side will listen for the notifications and manage those using 
 
 * **connectSocket function**:This function creates a connection to a WebSocket server running on a specific port, allowing you to send and receive real-time notifications between the client and server.
 
-```ruby
-notifications.connectSocket(serverPort);
-```
+  ```ruby
+  notifications.connectSocket(serverPort);
+  ```
 
 * **subscribe function**:
   This function makes it possible for the user to be subscribed to a room using an ID.So you will call this function and pass as parameter the ID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
