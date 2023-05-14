@@ -130,7 +130,7 @@ The client on his side will listen for the notifications and manage those using 
     });
    ```
    
-* **delete function**:
+* **deleteNotification function**:
   Using this function the client can manage his notifications by deleting each one of them after he has seen them.
   
   ```ruby
