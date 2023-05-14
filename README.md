@@ -29,8 +29,8 @@ Like I explained in the description to send an email to a specific group of user
 const data = {
   content: 'Test notification',
   targets: [
-    'dabdiaj20@epoka.edu.al',
-    'da.abdiaj@gmail.com'
+    'example1@gmail.com',
+    'example2@gmail.com'
   ]
 };
 
@@ -54,6 +54,32 @@ fetch(url+'/api/mail', {
 * ### Sending Text Messages
 You will follow the same approach for sending text messages.You will call the post method to the API endpoint(**url+'/api/textMessage'**) 
 that is used to send text messages and and pass a JSON object with the **content**(Content of the text) and **targets**(Who to send the text messages to).
+
+```ruby 
+const data ={
+content:'Test notification',
+ targets:[
+      '+35569239****'
+  ]
+};
+
+fetch(url+'/api/textMessage', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  ```
+
+
 
 * ### Sending Live Push Notifications
 For sending live push notifications I have used socket.io.The idea behind this is that the client from his side will subscribe to a socket room using a socket ID and you
