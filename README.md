@@ -107,11 +107,8 @@ fetch(url+'/liveNotifications', {
 
 ## Client Side Listening for the Live Notifications
 
-The client on his side will listen for the notifications and manage those using some specific functions.I have included some of the functions in a **client folder** that
-has a **functions.js file**.
+The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to import the notification library from the file and use it's functions.
 
-First thing I have done is to connect the client with the server or in other words make a socket connection since the client will be not communicating 
-using API.
 
 * **Subscribe Function**:
   This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
