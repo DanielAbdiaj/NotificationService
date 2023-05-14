@@ -89,7 +89,7 @@ const data ={
  message:'Test notification',
 };
 
-fetch(url+'/api/textMessage', {
+fetch(url+'/liveNotifications', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
