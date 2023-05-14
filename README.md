@@ -34,7 +34,7 @@ const data = {
   ]
 };
 
-fetch('/endpoint-url', {
+fetch(url+'/api/mail', {
   method: 'POST',
   headers: {
     'Content-Type': 'application/json'
