@@ -121,7 +121,7 @@ The client on his side will listen for the notifications and manage those using 
   ```
   
 * **socket.on 'new-notification' Function**:
-  Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room from Redis after this new notification was added.
+  Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room after this new notification was added.
   
   ```ruby
   notifications.newNotification((resp) => {
