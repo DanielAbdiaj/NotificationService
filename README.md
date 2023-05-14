@@ -135,6 +135,7 @@ The client on his side will listen for the notifications and manage those using 
   
   ```ruby
   notifications.deleteNotification(userID,notificationID)
+  ```
 
   
 
