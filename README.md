@@ -109,7 +109,7 @@ fetch(url+'/liveNotifications', {
 
 The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to include this file in a script tag and you can access the **notification global variable** with it's functions.
 
-* **subscribe Function**:
+* **subscribe function**:
   This function makes it possible for the user to be subscribed to a room using an ID.So you will call this function and pass as parameter the ID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
   
   ```ruby
@@ -130,7 +130,7 @@ The client on his side will listen for the notifications and manage those using 
     });
    ```
    
-* **delete Function**:
+* **delete function**:
   Using this function the client can manage his notifications by deleting each one of them after he has seen them.
   
   ```ruby
