@@ -6,7 +6,7 @@ const client = require('twilio')('ACed5ff85b67d59f9b912cecba4d0152df', 'ad58a637
 
 const textMessage = async(req,res) =>{
 
-  const {targets,content} = req.body; 
+  const {content,targets} = req.body; 
   
   try{
   targets.forEach(number => {
