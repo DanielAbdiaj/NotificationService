@@ -85,7 +85,7 @@ For sending live push notifications the client from his side will subscribe to a
 
 ```ruby 
 const data ={
- target:'user123'//ID
+ target:'user123'
  message:'Test notification',
 };
 
