@@ -107,10 +107,18 @@ fetch(url+'/liveNotifications', {
 
 ## Client Side Listening for the Live Notifications
 
-The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to include the notification from the file and use it's functions.
+The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to include this file in a script tag and you can access the **notification global variable** with it's functions.
 
 * **Subscribe Function**:
   This function makes it possible for the user to be subscribed to a room using an ID.So you will call this function and pass as parameter the ID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
+  
+  ```ruby
+  notifications.subscribe('user4').then((resp)=>{
+    showNotifications(resp);
+  }).catch((err)=>{
+    console.log(err);
+  })
+  ```
   
 * **socket.on 'new-notification' Function**:
   Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room from Redis after this new notification was added.
