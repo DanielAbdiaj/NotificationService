@@ -81,7 +81,7 @@ fetch(url+'/api/textMessage', {
 
 * ### Sending Live Push Notifications
 
-For sending live push notifications the client from his side will subscribe to a socket room using a unique ID and you from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that you will call the API(**url+'/liveNotifications'**) with the **target**(which in this case is the ID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear for the notification(I will explain with more detail how the client part will work and how he will hear and manage the notifications in the section down bellow).
+For sending live push notifications the client from his side will subscribe to a room using a unique ID and you from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that you will call the API(**url+'/liveNotifications'**) with the **target**(which in this case is the ID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear for the notification(I will explain with more detail how the client part will work and how he will hear and manage the notifications in the section down bellow).
 
 ```ruby 
 const data ={
