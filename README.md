@@ -105,7 +105,7 @@ fetch(url+'/liveNotifications', {
   });
   ```
 
-* ### Client Side Listening for the Live Notifications
+## Client Side Listening for the Live Notifications
 
 The client on his side will listen for the notifications and manage those using some specific functions.I have included some of the functions in a **client folder** that
 has a **functions.js file**.
