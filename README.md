@@ -113,7 +113,7 @@ The client on his side will listen for the notifications and manage those using 
   This function makes it possible for the user to be subscribed to a room using an ID.So you will call this function and pass as parameter the ID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
   
   ```ruby
-  notifications.subscribe('user4').then((resp)=>{
+  notifications.subscribe('ID').then((resp)=>{
     showNotifications(resp);
   }).catch((err)=>{
     console.log(err);
