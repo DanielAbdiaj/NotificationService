@@ -25,28 +25,7 @@ The usage on each of these is explained with details down bellow.
 
 Like I explained in the description to send an email to a specific group of users you just have to call a post method to the API endpoint (**url+'/api/mail'**) that is used to send emails and pass a JSON object with the **content**(Content of the email) and **targets**(Who to send the email to).
 
-`const data = {
-  content: 'Test notification',
-  targets: [
-    'dabdiaj20@epoka.edu.al',
-    'da.abdiaj@gmail.com'
-  ]
-};
-
-fetch('/endpoint-url', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify(data)
-})
-  .then(response => response.json())
-  .then(data => {
-    console.log('Success:', data);
-  })
-  .catch(error => {
-    console.error('Error:', error);
-  });`
+`const data` 
 
 * ### Sending Text Messages
 You will follow the same approach for sending text messages.You will call the post method to the API endpoint(**url+'/api/textMessage'**) 
