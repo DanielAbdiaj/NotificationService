@@ -39,9 +39,37 @@ const io = require('socket.io')(server, {
     }
 });
 
+const domains={
+    connection123:[
+        'http://127.0.0.1:5501',
+        'http://127.0.0.1:5500'
+    ]
+}
+
+function isDomainAllowed(obj, property, value) {
+    if (obj.hasOwnProperty(property)) {
+      const domainArray = obj[property];
+      return domainArray.includes(value);
+    }
+    return false;
+  }
+
 io.on('connection',function(socket){
 
     console.log('Made socket connection!');
+
+    const requestDomain = socket.handshake.headers.origin;
+    console.log('Connection came from:', requestDomain);
+
+    const connectionId = socket.handshake.query.id;
+    console.log('Connected with ID:', connectionId);
+
+    if (isDomainAllowed(domains,connectionId,requestDomain)) {
+        console.log('Domain is allowed!');
+      } else {
+        console.log("This domain is not allowed")
+        socket.disconnect();
+      }
 
     socket.on('disconnect',function(){
         console.log("Made socket disconnected")
@@ -51,7 +79,7 @@ io.on('connection',function(socket){
         await socket.join(userRoom);
         console.log(`Subscribed:${userRoom}`);
         const notifications=await client.hGetAll(userRoom);
-        io.to(userRoom).emit("subscribed",notifications)
+        io.to(userRoom).emit("subscribed",notifications);
     }) 
 
     socket.on('deleteNotifications',async(res)=>{
