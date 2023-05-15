@@ -79,30 +79,69 @@ fetch(url+'/api/textMessage', {
   });
   ```
 
-
-
 * ### Sending Live Push Notifications
-For sending live push notifications I have used socket.io.The idea behind this is that the client from his side will subscribe to a socket room using a socket ID and you
-from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that I call the API
-(**url+'/liveNotifications'**) with the **target**(which in this case is the socketID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear for the notification(I will explain with more detail how the client part will work and how he will hear and manage the notifications in the section down bellow).
 
+For sending live push notifications the client from his side will subscribe to a room using a unique ID and you from your side can send notifications to this room.A specific room that has it's own ID can have a group of users subscribed to it.In the moment that you will call the API(**url+'/liveNotifications'**) with the **target**(which in this case is the ID/room I want to emit the notification to) and **message**(which is the content of the notification I want to send)the notification will be emitted and the clients can hear for the notification(I will explain with more detail how the client part will work and how he will hear and manage the notifications in the section down bellow).
 
+```ruby 
+const data ={
+ target:'user123'
+ message:'Test notification',
+};
 
+fetch(url+'/liveNotifications', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify(data)
+})
+  .then(response => response.json())
+  .then(data => {
+    console.log('Success:', data);
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+  ```
 
-* ### Client Side Listening for the Live Notifications
+## Client Side Listening for the Live Notifications
 
-The client on his side will listen for the notifications and manage those using some specific functions.I have included some of the functions in a **client folder** that
-has a **functions.js file**.
+The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to include this file in a script tag and you can access the **notification global variable** with it's functions.
 
-First thing I have done is to connect the client with the server or in other words make a socket connection since the client will be not communicating 
-using API.
+* **connect function**:This function creates a connection to the server running on a specific port, allowing you to send and receive real-time notifications between the client and server.
 
-* **Subscribe Function**:
-  This function makes it possible for the user to be subscribed to a room using socketID.So you will call this function and pass as parameter the socketID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
-* **socket.on 'new-notification' Function**:
-  Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room from Redis after this new notification was added.
-* **Delete Function**:
+  ```ruby
+  notifications.connectSocket(serverPort);
+  ```
+
+* **subscribe function**:
+  This function makes it possible for the user to be subscribed to a room using an ID.So you will call this function and pass as parameter the ID to be part of a     specific room.This function also hears if the user subscribed the room successfully and returns a JSON of the current notification of that room.
+  
+  ```ruby
+  notifications.subscribe(userID).then((resp)=>{
+    showNotifications(resp);
+  }).catch((err)=>{
+    console.log(err);
+  })
+  ```
+  
+* **newNotification function**:
+  Using this function the client can hear the notifications from the server(only the notifications where it's subscribed to).When the server emits a notification it emits a   message and a JSON of updated notifications of this specific room after this new notification was added.
+  
+  ```ruby
+  notifications.newNotification((resp) => {
+      console.log(resp.message);
+      console.log(resp.notifications);
+    });
+   ```
+   
+* **deleteNotification function**:
   Using this function the client can manage his notifications by deleting each one of them after he has seen them.
+  
+  ```ruby
+  notifications.deleteNotification(userID,notificationID)
+  ```
 
   
 
