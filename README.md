@@ -112,7 +112,7 @@ The client on his side will listen for the notifications and manage those using 
 * **connect function**:This function creates a connection to the server running on a specific port, allowing you to send and receive real-time notifications between the client and server.
 
   ```ruby
-  notifications.connectSocket(serverPort);
+  notifications.connect(serverPort);
   ```
 
 * **subscribe function**:
