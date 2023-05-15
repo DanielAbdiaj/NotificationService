@@ -109,7 +109,7 @@ fetch(url+'/liveNotifications', {
 
 The client on his side will listen for the notifications and manage those using some specific functions.All the necessary packages and functions are inside the **notificationBundle.js file**.You just have to include this file in a script tag and you can access the **notification global variable** with it's functions.
 
-* **connectSocket function**:This function creates a connection to a WebSocket server running on a specific port, allowing you to send and receive real-time notifications between the client and server.
+* **connectSocket function**:This function creates a connection to the server running on a specific port, allowing you to send and receive real-time notifications between the client and server.
 
   ```ruby
   notifications.connectSocket(serverPort);
